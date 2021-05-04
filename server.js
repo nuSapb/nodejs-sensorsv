@@ -6,14 +6,6 @@ const path = require("path")
 const app = express()
 app.use(express.json()) // parses incoming requests with JSON payloads
 
-// declare react files in build as static
-app.use(express.static(path.join(__dirname, "build")))
-
-// serve index.html from the build folder
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"))
-})
-
 //create connection to database
 const db = mysql.createPool({
   host: process.env.DB_HOST, //localhost
@@ -22,8 +14,8 @@ const db = mysql.createPool({
   database: process.env.DB, //ravenbooks
 })
 
-app.get("/index", (req, res) => {
-  res.json({ answer: 42, hello: "world" })
+app.get("/test", (req, res) => {
+  res.json({ sensorID: 9999999, sensorValue: 9999 })
 })
 
 app.get("/sensor", (req, res) => {
