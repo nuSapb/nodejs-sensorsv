@@ -22,6 +22,10 @@ const db = mysql.createPool({
   database: process.env.DB, //ravenbooks
 })
 
+app.get("/index", (req, res) => {
+  res.json({ answer: 42, hello: "world" })
+})
+
 app.get("/sensor", (req, res) => {
   db.query("SELECT * FROM sensor_profile   ", (err, result) => {
     if (err) {
