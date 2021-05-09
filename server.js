@@ -19,23 +19,53 @@ app.get("/test", (req, res) => {
 })
 
 app.get("/sensor", (req, res) => {
-  db.query("SELECT * FROM sensor_profile   ", (err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send(result)
-    }
-  })
+  let id = req.query.id
+  console.log(id)
+  if (id) {
+    db.query(
+      `SELECT * FROM sensor_profile where sensor_id = ${id} LIMIT 1`,
+      (err, result) => {
+        if (err) {
+          console.log(err)
+        } else {
+          res.send(result)
+        }
+      }
+    )
+  } else {
+    db.query("SELECT * FROM sensor_profile   ", (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(result)
+      }
+    })
+  }
 })
 
 app.get("/data", (req, res) => {
-  db.query("SELECT * FROM sensor_data   ", (err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send(result)
-    }
-  })
+  let id = req.query.id
+  console.log(id)
+  if (id) {
+    db.query(
+      `SELECT * FROM sensor_data where sensor_id = ${id} LIMIT 1`,
+      (err, result) => {
+        if (err) {
+          console.log(err)
+        } else {
+          res.send(result)
+        }
+      }
+    )
+  } else {
+    db.query("SELECT * FROM sensor_data", (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(result)
+      }
+    })
+  }
 })
 
 app.post("/sensor", (req, res) => {
