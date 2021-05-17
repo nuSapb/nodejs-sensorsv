@@ -53,7 +53,8 @@ app.get("/data", (req, res) => {
         if (err) {
           console.log(err)
         } else {
-          res.send(result)
+          console.log(result[0])
+          res.send(result[0])
         }
       }
     )
